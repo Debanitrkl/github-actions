@@ -15,7 +15,7 @@ on:
       - main
 
 env:
-  PROJECT_ID: commeng-play
+  GCLOUD_PROJECT: commeng-play
   GKE_CLUSTER: autopilot-cluster-1    # Add your cluster name here.
   GKE_ZONE: us-central1   # Add your cluster zone here.
   DEPLOYMENT_NAME: gke-test # Add your deployment name here.
@@ -35,7 +35,7 @@ jobs:
     - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ env.PROJECT_ID }}
+        project_id: ${{ env.GCLOUD_PROJECT }}
 
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
