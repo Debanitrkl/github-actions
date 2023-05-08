@@ -30,17 +30,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
-    # Setup gcloud CLI
-    - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
       with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ env.GCLOUD_PROJECT }}
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
-    - run: |-
-        gcloud --quiet auth configure-docker
+    - id: 'get-credentials'
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name: 'autopilot-cluster-1'
+        location: 'us-central1'
 
 
     # Get the GKE credentials so we can deploy to the cluster
