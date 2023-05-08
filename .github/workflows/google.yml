@@ -42,12 +42,6 @@ jobs:
         location: 'us-central1'
 
 
-    # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@v1.0.1
-      with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
-        credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
     - name: Build
